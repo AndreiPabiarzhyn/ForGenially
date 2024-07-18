@@ -21,7 +21,7 @@
             padding: 10px;
             height: 200px;
             overflow: auto;
-            white-space: pre-wrap; /* to handle newline characters */
+            white-space: pre-wrap;
             background-color: #333;
             color: #fff;
         }
@@ -31,9 +31,9 @@
     </style>
 </head>
 <body onload="brython()">
-    <h2>Brython IDE!!!</h2>
+    <h2>Brython IDE</h2>
     <textarea id="code" name="code">
-print("Hello, Brython!!!!")
+print("Hello, Brython!---")
 name = input('Введите свое имя: ')
 print(f'Привет, {name}')
     </textarea>
@@ -57,21 +57,25 @@ print(f'Привет, {name}')
             script.type = 'text/python';
             script.innerHTML = `
 import sys
-from browser import document, window, html
+from browser import document, window
 
 class Output:
     def write(self, text):
         document['output'].innerHTML += text
 
-console.log() = Output()
-console.log() = Output()
+sys.stdout = Output()
+sys.stderr = Output()
 
+# Redefine input to use JavaScript prompt
 def input(prompt=''):
     document['output'].innerHTML += prompt
     return window.prompt(prompt)
 
 code = """${code}"""
-exec(code)
+try:
+    exec(code)
+except Exception as e:
+    document['output'].innerHTML += str(e)
 `;
             document.body.appendChild(script);
         }
