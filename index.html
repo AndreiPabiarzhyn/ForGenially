@@ -28,6 +28,8 @@
     <h2>Brython IDE</h2>
     <textarea id="code" name="code">
 print("Hello, Brython!")
+name = input('Введите свое имя: ')
+print(f'Привет, {name}')
     </textarea>
     <button onclick="runCode()">Run</button>
     <pre id="output"></pre>
@@ -43,26 +45,33 @@ print("Hello, Brython!")
             var code = editor.getValue();
             var output = document.getElementById("output");
             output.innerHTML = '';
-            __BRYTHON__.py2js(code, '__main__').run();
+            var script = document.createElement('script');
+            script.type = 'text/python';
+            script.innerHTML = `
+import sys
+from browser import document, window
+
+output = document['output']
+output.innerHTML = ''
+
+class Output:
+    def write(self, text):
+        output.innerHTML += text
+
+sys.stdout = Output()
+sys.stderr = Output()
+
+try:
+    ${code}
+except Exception as e:
+    output.innerHTML += str(e)
+`;
+            document.body.appendChild(script);
         }
 
         document.addEventListener("brython_loaded", function() {
             runCode();
         });
-    </script>
-    <script type="text/python">
-        from browser import document, console
-
-        def run_code(event):
-            code = document['code'].value
-            output = document['output']
-            output.text = ''
-            try:
-                exec(code)
-            except Exception as e:
-                output.text = str(e)
-
-        document['code'].bind('input', run_code)
     </script>
 </body>
 </html>
