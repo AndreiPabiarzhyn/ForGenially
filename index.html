@@ -21,6 +21,7 @@
             padding: 10px;
             height: 200px;
             overflow: auto;
+            white-space: pre-wrap; /* to handle newline characters */
         }
     </style>
 </head>
@@ -44,34 +45,41 @@ print(f'Привет, {name}')
         function runCode() {
             var code = editor.getValue();
             var output = document.getElementById("output");
-            output.innerHTML = '';
+            output.innerHTML = ''; // clear previous output
+
+            // Create a script element to run the Brython code
             var script = document.createElement('script');
             script.type = 'text/python';
             script.innerHTML = `
 import sys
 from browser import document, window
 
-output = document['output']
-output.innerHTML = ''
-
 class Output:
+    def __init__(self):
+        self.content = ''
+
     def write(self, text):
-        output.innerHTML += text
+        self.content += text
+        window.output.value += text
 
 sys.stdout = Output()
 sys.stderr = Output()
 
+output = document["output"]
+output.innerHTML = ""
+
 try:
-    ${code}
+    exec(${JSON.stringify(code)})
 except Exception as e:
     output.innerHTML += str(e)
 `;
+            // Remove any existing Brython scripts to avoid duplication
+            var existingScript = document.querySelector('script[type="text/python"]');
+            if (existingScript) {
+                existingScript.remove();
+            }
             document.body.appendChild(script);
         }
-
-        document.addEventListener("brython_loaded", function() {
-            runCode();
-        });
     </script>
 </body>
 </html>
