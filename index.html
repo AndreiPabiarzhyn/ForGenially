@@ -57,15 +57,18 @@ print(f'Привет, {name}')
             script.type = 'text/python';
             script.innerHTML = `
 import sys
-from browser import document, window
+from browser import document, window, html
 
 class Output:
     def write(self, text):
-        self.text = document['output'].innerHTML + text
-        document['output'].innerHTML = self.text
+        document['output'].innerHTML += text
 
 sys.stdout = Output()
 sys.stderr = Output()
+
+def input(prompt=''):
+    document['output'].innerHTML += prompt
+    return window.prompt(prompt)
 
 code = """${code}"""
 exec(code)
