@@ -47,7 +47,13 @@ print(f'Привет, {name}')
             var output = document.getElementById("output");
             output.innerHTML = ''; // clear previous output
 
-            // Create a script element to run the Brython code
+            // Remove any existing Brython scripts to avoid duplication
+            var existingScript = document.querySelector('script[type="text/python"]');
+            if (existingScript) {
+                existingScript.remove();
+            }
+
+            // Create a new script element
             var script = document.createElement('script');
             script.type = 'text/python';
             script.innerHTML = `
@@ -55,29 +61,15 @@ import sys
 from browser import document, window
 
 class Output:
-    def __init__(self):
-        self.content = ''
-
     def write(self, text):
-        self.content += text
-        window.output.value += text
+        document['output'].innerHTML += text
 
 sys.stdout = Output()
 sys.stderr = Output()
 
-output = document["output"]
-output.innerHTML = ""
-
-try:
-    exec(${JSON.stringify(code)})
-except Exception as e:
-    output.innerHTML += str(e)
+code = """${code}"""
+exec(code)
 `;
-            // Remove any existing Brython scripts to avoid duplication
-            var existingScript = document.querySelector('script[type="text/python"]');
-            if (existingScript) {
-                existingScript.remove();
-            }
             document.body.appendChild(script);
         }
     </script>
