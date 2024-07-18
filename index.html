@@ -52,12 +52,6 @@ print(f'Привет, {name}')
             var output = document.getElementById("output");
             output.innerHTML = ''; // clear previous output
 
-            // Remove any existing Brython scripts to avoid duplication
-            var existingScript = document.querySelector('script[type="text/python"]');
-            if (existingScript) {
-                existingScript.remove();
-            }
-
             // Create a new script element
             var script = document.createElement('script');
             script.type = 'text/python';
@@ -67,7 +61,8 @@ from browser import document, window
 
 class Output:
     def write(self, text):
-        document['output'].innerHTML += text
+        self.text = document['output'].innerHTML + text
+        document['output'].innerHTML = self.text
 
 sys.stdout = Output()
 sys.stderr = Output()
