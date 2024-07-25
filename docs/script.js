@@ -15,7 +15,6 @@ let currentIndex = -1;
 function setLanguage(language) {
   selectedColors = colors[language];
   resetGame();
-  showWord();
 }
 
 const showWord = () => {
@@ -24,9 +23,13 @@ const showWord = () => {
     showModal();
     return;
   }
+  updateWordAndColor();
+  document.getElementById("remainingCount").textContent = selectedColors.length - currentIndex;
+};
+
+const updateWordAndColor = () => {
   document.getElementById("word").textContent = selectedColors[currentIndex];
   document.getElementById("colorSquare").style.backgroundColor = getColorByIndex(currentIndex);
-  document.getElementById("remainingCount").textContent = selectedColors.length - currentIndex;
 };
 
 const getColorByIndex = (index) => {
@@ -76,6 +79,7 @@ const resetGame = () => {
   document.getElementById("userInput").value = "";
   document.getElementById("resultModal").style.display = "none";
   document.getElementById("remainingCount").textContent = selectedColors.length;
+  showWord(); // Display the first word and color
 };
 
 window.onload = () => {
