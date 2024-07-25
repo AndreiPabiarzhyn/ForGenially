@@ -27,25 +27,28 @@
       </div>
       <input type="text" id="userInput" placeholder="Type the word">
       <div class="score">
-        <span class="correct">😀: <span id="correctCount">0</span></span>
+        <span class="correct">👍: <span id="correctCount">0</span></span>
         <span class="wrong">🥵: <span id="wrongCount">0</span></span>
-        <span class="remaining">🧮: <span id="remainingCount">9</span></span>
+        <span class="remaining"> 🧮: <span id="remainingCount">9</span></span>
       </div>
     </div>
   </div>
 
   <div class="modal" id="resultModal">
     <div class="modal-content">
-      <img src="https://res.cloudinary.com/dk0qm0a6j/image/upload/v1719257355/unname111d_isjbhn.gif" alt="Gif" id="resultGif">
-      <div class="result-text">
-        <p>😀: <span id="modalCorrectCount">0</span></p>
-        <p>🥵: <span id="modalWrongCount">0</span></p>
+      <div class="modal-left">
+        <div class="result-text">
+          <p>👍: <span id="modalCorrectCount">0</span></p>
+          <p>🥵: <span id="modalWrongCount">0</span></p>
+        </div>
+        <button id="restartButton">Restart</button>
       </div>
-      <button id="restartButton">Restart</button>
+      <div class="modal-right">
+        <img src="https://res.cloudinary.com/dk0qm0a6j/image/upload/v1719257355/unname111d_isjbhn.gif" alt="Gif" id="resultGif">
+      </div>
     </div>
   </div>
 
   <script src="script.js"></script>
 </body>
 </html>
-
