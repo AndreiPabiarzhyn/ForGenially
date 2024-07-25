@@ -4,7 +4,8 @@ const colors = {
   spanish: ["rojo", "azul", "negro", "blanco", "verde", "naranja", "cian", "amarillo", "rosa"],
   italian: ["rosso", "blu", "nero", "bianco", "verde", "arancione", "ciano", "giallo", "rosa"],
   polish: ["czerwony", "niebieski", "czarny", "biały", "zielony", "pomarańczowy", "cyjan", "żółty", "różowy"],
-  turkish: ["kırmızı", "mavi", "siyah", "beyaz", "yeşil", "turuncu", "camgöbeği", "sarı", "pembe"]
+  turkish: ["kırmızı", "mavi", "siyah", "beyaz", "yeşil", "turuncu", "camgöbeği", "sarı", "pembe"],
+  indonesian: ["merah", "biru", "hitam", "putih", "hijau", "oranye", "sian", "kuning", "merah muda"]
 };
 
 let selectedColors = colors.english; // default to English
@@ -13,13 +14,17 @@ let wrongCount = 0;
 let currentIndex = -1;
 
 function setLanguage(language) {
-  selectedColors = colors[language];
-  resetGame();
+  if (colors[language]) {
+    selectedColors = colors[language];
+    resetGame();
+  } else {
+    console.error(`Language "${language}" not found in colors`);
+  }
 }
 
 const showWord = () => {
   currentIndex++;
-  if (currentIndex === selectedColors.length) {
+  if (currentIndex >= selectedColors.length) {
     showModal();
     return;
   }
