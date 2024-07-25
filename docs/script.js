@@ -26,7 +26,7 @@ const showWord = () => {
   }
   document.getElementById("word").textContent = selectedColors[currentIndex];
   document.getElementById("colorSquare").style.backgroundColor = getColorByIndex(currentIndex);
-  document.getElementById("remainingCount").textContent = selectedColors.length - currentIndex - 1;
+  document.getElementById("remainingCount").textContent = selectedColors.length - currentIndex;
 };
 
 const getColorByIndex = (index) => {
@@ -75,7 +75,7 @@ const resetGame = () => {
   document.getElementById("wrongCount").textContent = wrongCount;
   document.getElementById("userInput").value = "";
   document.getElementById("resultModal").style.display = "none";
-  document.getElementById("remainingCount").textContent = selectedColors.length;
+  document.getElementById("remainingCount").textContent = selectedColors.length + 1;
 };
 
 window.onload = () => {
