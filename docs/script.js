@@ -75,7 +75,7 @@ const resetGame = () => {
   document.getElementById("wrongCount").textContent = wrongCount;
   document.getElementById("userInput").value = "";
   document.getElementById("resultModal").style.display = "none";
-  document.getElementById("remainingCount").textContent = selectedColors.length + 1;
+  document.getElementById("remainingCount").textContent = selectedColors.length;
 };
 
 window.onload = () => {
