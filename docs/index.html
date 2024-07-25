@@ -1,1 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keyboard Simulator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="game-container">
+    <div class="game">
+      <div class="language-select">
+        <div class="row">
+          <button class="language-button" data-lang="english">English</button>
+          <button class="language-button" data-lang="russian">Russian</button>
+          <button class="language-button" data-lang="spanish">Spanish</button>
+        </div>
+        <div class="row">
+          <button class="language-button" data-lang="italian">Italian</button>
+          <button class="language-button" data-lang="polish">Polish</button>
+          <button class="language-button" data-lang="turkish">Turkish</button>
+        </div>
+      </div>
+      <div id="wordContainer">
+        <div id="word"></div>
+        <div id="colorSquare"></div>
+      </div>
+      <input type="text" id="userInput" placeholder="Type the word">
+      <div class="score">
+        <span class="correct">😀: <span id="correctCount">0</span></span>
+        <span class="wrong">🥵: <span id="wrongCount">0</span></span>
+        <span class="remaining">🧮: <span id="remainingCount">9</span></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="resultModal">
+    <div class="modal-content">
+      <img src="https://res.cloudinary.com/dk0qm0a6j/image/upload/v1719257355/unname111d_isjbhn.gif" alt="Gif" id="resultGif">
+      <div class="result-text">
+        <p>😀: <span id="modalCorrectCount">0</span></p>
+        <p>🥵: <span id="modalWrongCount">0</span></p>
+      </div>
+      <button id="restartButton">Restart</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
 
